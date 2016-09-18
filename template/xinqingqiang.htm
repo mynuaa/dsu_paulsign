@@ -1,0 +1,46 @@
+{template common/header}
+<link rel="stylesheet" type="text/css" href="./source/plugin/dsu_paulsign/template/main.css" />
+<script type="text/javascript" src="./static/js/jquery.min.js"></script>
+<script type="text/javascript" src="./source/plugin/dsu_paulsign/template/main.js"></script>
+
+
+<div class="moodwall" id="moodhead" onselectstart="return false">
+	<div class="mood_wall">
+		<img src="./source/plugin/dsu_paulsign/img/ZS.png" id="zs" />
+		<img src="./source/plugin/dsu_paulsign/img/ZX.png" id="zx" />
+		<img src="./source/plugin/dsu_paulsign/img/YS.png" id="ys" />
+		<img src="./source/plugin/dsu_paulsign/img/YX.png" id="yx" />
+		<div id="Qdao">
+			<a href="./plugin.php?id=dsu_paulsign:sign">
+				<img src="./source/plugin/dsu_paulsign/img/Qdao.png">
+			</a>
+		</div>
+		{loop $result $t}
+		<div class="mood" style='background-image:url("./source/plugin/dsu_paulsign/img/{$t['qdxq']}.png")'>
+			<div class="mood_content">
+				<center>
+				<span style="color:black;">看</span>
+				<span class="mood_s">
+					{$t[9]}&nbsp
+				</span>
+				<span style="color:black;">只灰机</span>
+				<span style="color:black;">
+					<br />发表时间：{DATE($t['time'])}
+				</span>
+				<div class="mood_t">
+					{$t['todaysay']}
+				</div>
+				</center>
+				<p class="mood_p">
+					<img class="mood_i" src="./source/plugin/dsu_paulsign/img/2/{$t['qdxq']}.gif" />
+				</p>
+				<a href="./space-uid-{$t['uid']}.html">
+					<span class="mood_n" style="color:black;">{$t[8]}</span>
+					<span class="mood_avatar">{avatar($t['uid'],middle)}</span>
+				</a>
+			</div>
+		</div>
+		{/loop}
+	</div>
+</div>
+{template common/footer}
