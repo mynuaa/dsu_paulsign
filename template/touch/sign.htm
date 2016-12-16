@@ -1,67 +1,186 @@
 <!--{subtemplate touch/common/header}-->
-<div class="box">
-	<a href="./forum.php?mobile=yes" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em> &gt; </em><a href="plugin.php?id=dsu_paulsign:sign&mobile=yes">{lang dsu_paulsign:name}</a>
-</div>
-<div id="ct" class="wp">
-	<div class="vt">
-		<div class="bm mtn">
-			<!--{if $qiandaodb['time'] < $tdtime}-->
-				<div class="bm_h">
-					{lang dsu_paulsign:wap_01}<!--{if $var['ftopen']}--><br><font color="red">[{lang dsu_paulsign:mb_xz1}]</font><!--{/if}-->
-				</div>
-				<div class="bm_c">
-					<form name="qiandao" method="post" action="plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=0&inajax=0&mobile=yes">
-						<input type="hidden" name="formhash" value="{FORMHASH}">
-						<label for="mind"><strong>{lang dsu_paulsign:wap_02}</strong></label>
-						<select name="qdxq">
-							<!--{loop $emots $key $value}-->
-								<option value="{$key}">{$value['name']}</option>
-							<!--{/loop}-->
-						</select>
-						<br>
-						<!--{if !$var['sayclose']}-->
-							<label for="mode"><strong>{lang dsu_paulsign:mb_mode1}</strong></label>
-							<label><input type="radio" name="qdmode" value="1" checked="checked" onclick="if(checked == true){document.getElementById('mode1').style.display='';document.getElementById('mode2').style.display='none';}">&nbsp;{lang dsu_paulsign:mb_mode2}</label>&nbsp;&nbsp;
-							<!--{if $var['ksopen']}--><label><input type="radio" name="qdmode" value="2" onclick="if(checked == true){document.getElementById('mode1').style.display='none';document.getElementById('mode2').style.display='';}">&nbsp;{lang dsu_paulsign:mb_mode3}</label>&nbsp;&nbsp;<!--{/if}-->
-							<!--{if $var['todaysayxt']}--><label><input type="radio" name="qdmode" value="3" onclick="if(checked){document.getElementById('mode1').style.display='none';document.getElementById('mode2').style.display='none';}">&nbsp;{lang dsu_paulsign:noq}</label><!--{/if}-->
-							<div id="mode1" style="display:;">
-								<label for="zxs"><strong>{lang dsu_paulsign:mb_zxs}</strong></label>
-								<input type="text" name="todaysay" id="todaysay" class="txt" />
-								<span class="xg2">{lang dsu_paulsign:mb_xzzs}</span>
-							</div>
-							<div id="mode2" style="display:none;">
-								<label for="fastreply"><strong>{lang dsu_paulsign:mb_fastreply}</strong></label>
-								<select name="fastreply">
-									<!--{loop $fastreplytexts $key $value}-->
-										<option value="{$key}" style="color:#{eval echo dechex(rand(0, 255)).dechex(rand(0,196)).dechex(rand(0,255));}">{$value}</option>
+<head>
+	<style type="text/css">
+	.today_1
+	{
+
+	}
+	.button_onclick
+	{
+
+		margin-top: 10px;
+		position: relative; 
+		left: 50%;
+    	transform: translate(-50%);
+		background-color: #0e90d2;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-border-radius: 5px;
+		border: none;
+		padding: 10px 25px 10px 25px;
+		color: #FFF;
+		text-shadow: 1px 1px 1px #949494;
+		outline: none;
+	}
+	.button_onclick:focus
+	{
+		transition:background-color 0.2s;
+		background-color:#FFFFFF;
+	}
+	.text_xzzs
+	{
+		text-align: center;	
+	}
+	.input_jtzxs,.jrzxsms
+	{
+		position: relative; 
+		left: 50%; 
+    	transform: translate(-50%);
+	}
+	.text_zxs
+	{
+		position: relative; 
+		left: 50%; 
+    	transform: translate(-50%);
+    	font-size: 120%;
+	}
+	.jrzxsms
+	{
+		font-size: 110%;
+	}
+	.option_qdxq
+	{
+		position: relative; 
+		left: 55%; 
+    	transform: translate(-50%);
+    	width: 55.2px;
+    	height: 30px;
+    	background: #000000;
+    	border-radius:2px;
+    	color:#FFFFFF;
+    	outline: none;
+	}
+	.box_1
+	{
+		padding-top:15px;
+		border-top: thin solid;
+		padding-bottom: 15px;
+		border-bottom: thin solid;
+	}
+	.input_jtzxs
+	{
+		text-align: center;
+		width:80%;
+		border: 0px; 
+		border-bottom: thin solid;
+		transition:width 0.5s;
+	}
+	.input_jtzxs:focus
+	{
+		width:90%; 
+		outline: none;
+		box-shadow: 0px 15px 18px -10px;
+	}
+	.qdfwt
+	{
+		text-align: center;
+		margin-top: 30px;
+		margin-bottom: 20px;
+		font-size: 140%;
+		color: #51711b;
+	}
+	.mod_zxs
+	{
+
+		position: relative;
+		left: 50%;
+    	transform: translate(-100%);
+		color: #636c7b;
+		margin: 0px;
+	}
+	.span_del_d
+	{
+		position: relative;
+		right: 10px;
+	}
+	</style>
+</head>
+	<div class="box_1">
+		<a href="./forum.php?mobile=yes" class="" title="{lang homepage}">$_G[setting][bbname]</a><em> &gt; </em><a href="plugin.php?id=dsu_paulsign:sign&mobile=yes">{lang dsu_paulsign:name}</a>
+	</div> 
+<div style="margin:4px;" >
+	<div id="" class="">
+		<div class="">
+			<div class="">
+				<!--{if $qiandaodb['time'] < $tdtime}-->
+					<div class="today_1">
+							{lang dsu_paulsign:wap_01}<!--{if $var['ftopen']}--><!--{/if}-->
+					</div>
+					<br>
+					<div class="bm_c">
+						<form name="qiandao" method="post" action="plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=0&inajax=0&mobile=yes">
+							<input type="hidden" name="formhash" value="{FORMHASH}">
+							<div class="qdxqxz">
+								<label for="mind" class="text_zxs"><strong>{lang dsu_paulsign:wap_02}</strong></label>
+								<select name="qdxq" class="option_qdxq">
+									<!--{loop $emots $key $value}-->
+										<option value="{$key}" class="option_style">{$value['name']}</option>
 									<!--{/loop}-->
 								</select>
 							</div>
-						<!--{/if}-->
-						<div class="inbox">
-							<input type="submit" value="{lang dsu_paulsign:encore_02}">
-						</div>
-					</form>
-				</div>
-			<!--{else}-->
-				<div class="bm_h">{lang dsu_paulsign:mb_jryqe}</div><br>
-			<!--{/if}-->
-		</div>
-		<div class="bm">
-			<div class="bm_h">{lang dsu_paulsign:mb_fwt}</div>
-			<div class="bm_c add">
-				<!--{if $qiandaodb}-->
-					<p><font color=#FF0000><b>$_G['username']</b></font> {lang dsu_paulsign:mb_fwt1} <b>$qiandaodb['days']</b> {lang dsu_paulsign:mb_fwt2}</p>
-					<p>{lang dsu_paulsign:mb_fwt3}<b>$qiandaodb['mdays']</b> {lang dsu_paulsign:mb_fwt2}</p>
-					<p>{lang dsu_paulsign:mb_fwt4}$q['if']{lang dsu_paulsign:mb_fwt5}</p>
-					<p>{lang dsu_paulsign:mb_fwt6}<font color=#ff00cc>$qtime</font> </p>
-					<p>{lang dsu_paulsign:mb_fwt8}{$_G[setting][extcredits][$var[nrcredit]][title]} <font color=#ff00cc><b>$qiandaodb['reward']</b></font> {$_G['setting']['extcredits'][$var[nrcredit]]['unit']}{lang dsu_paulsign:mb_fwt9}{$_G[setting][extcredits][$var[nrcredit]][title]} <font color=#ff00cc><b>$qiandaodb['lastreward']</b></font> {$_G['setting']['extcredits'][$var[nrcredit]]['unit']}.</p>
-					<p>{$q['level']}</p>
+
+							<!--{if !$var['sayclose']}-->
+								<div class="text_jrzxs">
+									<label for="mode" class="jrzxsms">{lang dsu_paulsign:mb_mode1}</label>
+									<br>
+									<label class="mod_zxs"><input  type="radio" name="qdmode" value="1" checked="checked" onclick="if(checked == true){document.getElementById('mode1').style.display='';document.getElementById('mode2').style.display='none';}">&nbsp;{lang dsu_paulsign:mb_mode2}</label>&nbsp;&nbsp;
+									<!--{if $var['ksopen']}--><label class="mod_zxs"><input type="radio" name="qdmode" value="2" onclick="if(checked == true){document.getElementById('mode1').style.display='none';document.getElementById('mode2').style.display='';}">&nbsp;{lang dsu_paulsign:mb_mode3}</label>&nbsp;&nbsp;<!--{/if}-->
+									<!--{if $var['todaysayxt']}--><label class="mod_zxs"><input type="radio" name="qdmode" value="3" onclick="if(checked){document.getElementById('mode1').style.display='none';document.getElementById('mode2').style.display='none';}">&nbsp;{lang dsu_paulsign:noq}</label><!--{/if}-->
+								</div>
+								<div id="mode1" style="display:;">
+									<label for="zxs" class="text_zxs">{lang dsu_paulsign:mb_zxs}</label>
+									<br>
+									<input type="text" name="todaysay" id="todaysay" class="input_jtzxs" />
+									<br>
+									
+									<div class="text_xzzs">{lang dsu_paulsign:mb_xzzs}</div>
+								</div>
+								<div id="mode2" style="display:none;">
+									<label for="fastreply"><strong>{lang dsu_paulsign:mb_fastreply}</strong></label>
+									<select name="fastreply">
+										<!--{loop $fastreplytexts $key $value}-->
+											<option value="{$key}" style="color:#{eval echo dechex(rand(0, 255)).dechex(rand(0,196)).dechex(rand(0,255));}">{$value}</option>
+										<!--{/loop}-->
+									</select>
+								</div>
+							<!--{/if}-->
+							<div class="">
+								<input type="submit" value="{lang dsu_paulsign:encore_02}" class="button_onclick">
+							</div>
+						</form>
+					</div>
 				<!--{else}-->
-					<p>{lang dsu_paulsign:mb_fwt7}</p>
+					<div class="">{lang dsu_paulsign:mb_jryqe}</div>
 				<!--{/if}-->
+			</div>
+			<div class="">
+			<br>
+				<div class="qdfwt">{lang dsu_paulsign:mb_fwt}</div>
+				<div class="">
+					<!--{if $qiandaodb}-->
+						<p><font color=#FF0000><b>$_G['username']</b></font> {lang dsu_paulsign:mb_fwt1} <b>$qiandaodb['days']</b> {lang dsu_paulsign:mb_fwt2}</p>
+						<p>{lang dsu_paulsign:mb_fwt3}<b>$qiandaodb['mdays']</b> {lang dsu_paulsign:mb_fwt2}</p>
+						<p>{lang dsu_paulsign:mb_fwt4}$q['if']{lang dsu_paulsign:mb_fwt5}</p>
+						<p>{lang dsu_paulsign:mb_fwt6}<font color=#ff00cc>$qtime</font> </p>
+						<p>{lang dsu_paulsign:mb_fwt8}{$_G[setting][extcredits][$var[nrcredit]][title]} <font color=#ff00cc><b>$qiandaodb['reward']</b></font> {$_G['setting']['extcredits'][$var[nrcredit]]['unit']}<br><span class="span_del_d">{lang dsu_paulsign:mb_fwt9}{$_G[setting][extcredits][$var[nrcredit]][title]} </span><font color=#ff00cc><b>$qiandaodb['lastreward']</b></font> {$_G['setting']['extcredits'][$var[nrcredit]]['unit']}.</p>
+						<p>{$q['level']}</p>
+					<!--{else}-->
+						<p>{lang dsu_paulsign:mb_fwt7}</p>
+					<!--{/if}-->
+					<br><br>
+				</div>
 			</div>
 		</div>
 	</div>
+	<!--{subtemplate touch/common/footer}-->
 </div>
-<!--{subtemplate touch/common/footer}-->
